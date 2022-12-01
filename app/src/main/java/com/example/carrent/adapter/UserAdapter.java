@@ -25,8 +25,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         void onClick(int position);
     }
 
-    public Dialog getDialog() {
-        return dialog;
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
     }
 
     public UserAdapter(Context context, List<User> list){
@@ -68,6 +68,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             tvAddress = itemView.findViewById(R.id.tvUserAddress);
             tvPosition = itemView.findViewById(R.id.tvUserPosition);
             imageUser = itemView.findViewById(R.id.civUserPhoto);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(dialog != null){
+                        dialog.onClick(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 }

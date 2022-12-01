@@ -2,10 +2,10 @@ package com.example.carrent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,19 +16,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,103 +35,71 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class FillUpDataActivity extends AppCompatActivity {
-    private String username, password, email, gender;
-    private EditText etFullName, etPhone, etAddress, date;
-    private RadioGroup rgGender;
-    private RadioButton rbMale, rbFemale;
-    private DatePickerDialog datePickerDialog;
-    private Button btnSignUp;
-    private CircleImageView imgProfile, imgInsert;
+public class InputCarActivity extends AppCompatActivity {
+    private ImageView carPhoto;
+    private EditText carName, carYear, carPrice, carTransmission, carCapacity;
+    private Button btnInput;
     private int GALLERY_REQUEST_CODE = 102, CAMERA_REQUEST_CODE = 101;
-    private Uri imageUri;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String id = "";
+
     private ProgressDialog progressDialog;
-    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fill_up_data);
+        setContentView(R.layout.activity_input_car);
 
-        username = getIntent().getExtras().getString("username");
-        password = getIntent().getExtras().getString("password");
-        email = getIntent().getExtras().getString("email");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
-        etFullName = findViewById(R.id.etFullName);
-        etPhone = findViewById(R.id.etTelephone);
-        etAddress = findViewById(R.id.etAddress);
-        btnSignUp = findViewById(R.id.btnRegister);
-        imgProfile = findViewById(R.id.civUserPhoto);
-        imgInsert = findViewById(R.id.civPhotoInsert);
-        date = findViewById(R.id.etDateOfBirth);
+        carPhoto = findViewById(R.id.ivCarPhoto);
+        carName = findViewById(R.id.etCarNameInput);
+        carYear = findViewById(R.id.etCarYearInput);
+        carPrice = findViewById(R.id.etCarPriceInput);
+        carTransmission = findViewById(R.id.etCarTransmissionInput);
+        carCapacity = findViewById(R.id.etCarSeatInput);
+        btnInput = findViewById(R.id.btnCarInput);
 
-        mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(InputCarActivity.this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Save data...");
 
-        rgGender = findViewById(R.id.rgGender);
-        rbMale = findViewById(R.id.Male);
-        rbFemale = findViewById(R.id.Female);
-
-            progressDialog = new ProgressDialog(FillUpDataActivity.this);
-            progressDialog.setTitle("Loading");
-            progressDialog.setMessage("Save...");
-
-        imgInsert.setOnClickListener(new View.OnClickListener() {
+        carPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectImage();
             }
         });
 
-        date.setOnClickListener(new View.OnClickListener() {
+        btnInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar calendar = Calendar.getInstance();
-                int mYear = calendar.get(Calendar.YEAR);
-                int mMonth = calendar.get(Calendar.MONTH);
-                int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-                datePickerDialog = new DatePickerDialog(FillUpDataActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
-        });
-
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(etFullName.getText().length()>0 && etPhone.getText().length()>0 && etAddress.getText().length()>0){
-                    int SelectedId = rgGender.getCheckedRadioButtonId();
-                    String value = "";
-
-                        if(SelectedId == rbMale.getId()){
-                            value = rbMale.getText().toString();
-                        }else if(SelectedId == rbFemale.getId()){
-                            value = rbFemale.getText().toString();
-                        }
-                    upload(username, email, etFullName.getText().toString(), etPhone.getText().toString(), etAddress.getText().toString(), value, date.getText().toString());
-                    register(email, password);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Please fill all the field", Toast.LENGTH_SHORT).show();
+                if(carName.getText().length()>0 && carYear.getText().length()>0 && carPrice.getText().length()>0 && carTransmission.getText().length()>0 && carCapacity.getText().length()>0) {
+                    progressDialog.show();
+                    upload(carName.getText().toString(), carYear.getText().toString(), carPrice.getText().toString(), carTransmission.getText().toString(), carCapacity.getText().toString());
                 }
             }
         });
+
+        Intent intent = getIntent();
+        if(intent != null){
+            id = intent.getStringExtra("id");
+            carName.setText(intent.getStringExtra("nama"));
+            carYear.setText(intent.getStringExtra("tahun"));
+            carPrice.setText(intent.getStringExtra("harga"));
+            carTransmission.setText(intent.getStringExtra("transmisi"));
+            carCapacity.setText(intent.getStringExtra("kapasitas"));
+            Glide.with(InputCarActivity.this).load(intent.getStringExtra("gambar")).into(carPhoto);
+        }
     }
-    
+
     private void selectImage(){
         final CharSequence[] items = {"Take Photo", "Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(FillUpDataActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(InputCarActivity.this);
         builder.setTitle(getString(R.string.app_name));
         builder.setIcon(R.mipmap.ic_launcher);
         builder.setItems(items, (dialog, item)-> {
@@ -150,21 +115,21 @@ public class FillUpDataActivity extends AppCompatActivity {
             }
         });
         builder.show();
-    }
+    };
 
-    private void upload(String username, String email, String fullname, String phone, String address, String valueRadio, String date){
+    private void upload(String nama, String tahun, String harga, String transmisi, String kapasitas){
         progressDialog.show();
 
-        imgProfile.setDrawingCacheEnabled(true);
-        imgProfile.buildDrawingCache();
-        Bitmap bitmap = ((BitmapDrawable) imgProfile.getDrawable()).getBitmap();
+        carPhoto.setDrawingCacheEnabled(true);
+        carPhoto.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) carPhoto.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
         //UPLOAD
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference reference = storage.getReference().child("profile.jpg");
+        StorageReference reference = storage.getReference("imageCar").child("IMG" + System.currentTimeMillis() + ".jpg");
         UploadTask uploadTask = reference.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -181,7 +146,7 @@ public class FillUpDataActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 if (task.getResult()!=null){
-                                    signup(username, email, fullname, phone, address, valueRadio, date, task.getResult().toString());
+                                    input(nama, tahun, harga, transmisi, kapasitas, task.getResult().toString());
                                 }else{
                                     Toast.makeText(getApplicationContext(), "Failed to upload image", Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
@@ -200,36 +165,49 @@ public class FillUpDataActivity extends AppCompatActivity {
         });
     }
 
-    private void signup(String username, String email, String fullname, String phone, String address, String valueRadio, String date, String imgProfile) {
-        Map<String, Object> user = new HashMap<>();
-        user.put("username", username);
-        user.put("email", email);
-        user.put("fullname", fullname);
-        user.put("phone", phone);
-        user.put("address", address);
-        user.put("gender", valueRadio);
-        user.put("date", date);
-        user.put("imgProfile", imgProfile);
+    private void input(String nama, String tahun, String harga, String transmisi, String kapasitas, String imgCar) {
+        Map<String, Object> car = new HashMap<>();
+        car.put("nama", nama);
+        car.put("tahun", tahun);
+        car.put("harga", harga);
+        car.put("transmisi", transmisi);
+        car.put("jumlah_orang", kapasitas);
+        car.put("imageCar", imgCar);
 
         progressDialog.show();
-        db.collection("users")
-                .add(user)
+        if (id != null){
+            db.collection("cars").document(id)
+                    .set(car)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(InputCarActivity.this, "Data has been updated", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(InputCarActivity.this, "Failed to update data", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }else{
+        db.collection("cars")
+                .add(car)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(), "Sign Up Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Input Success", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        Intent intent = new Intent(FillUpDataActivity.this, DashboardActivity.class);
+                        Intent intent = new Intent(InputCarActivity.this, DataCarActivity.class);
                         startActivity(intent);
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 });
+        }
     }
 
     @Override
@@ -241,8 +219,8 @@ public class FillUpDataActivity extends AppCompatActivity {
                 try{
                     InputStream inputStream = getContentResolver().openInputStream(path);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    imgProfile.post(() -> {
-                        imgProfile.setImageBitmap(bitmap);
+                    carPhoto.post(() -> {
+                        carPhoto.setImageBitmap(bitmap);
                     });
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -254,8 +232,8 @@ public class FillUpDataActivity extends AppCompatActivity {
             final Bundle extras = data.getExtras();
             Thread thread = new Thread(() -> {
                 Bitmap bitmap = (Bitmap) extras.get("data");
-                imgProfile.post(() -> {
-                    imgProfile.setImageBitmap(bitmap);
+                carPhoto.post(() -> {
+                    carPhoto.setImageBitmap(bitmap);
                 });
             });
         }
@@ -265,30 +243,4 @@ public class FillUpDataActivity extends AppCompatActivity {
         }
     }
 
-    private void register(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    Intent intent = new Intent(FillUpDataActivity.this, DashboardActivity.class);
-                }else{
-                    Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void reload(){
-        startActivity(new Intent(FillUpDataActivity.this, DashboardActivity.class));
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            reload();
-        }
-    }
 }

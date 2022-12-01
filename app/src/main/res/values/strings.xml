@@ -32,29 +32,28 @@
     <!-- login -->
     <string name="login_welcome">Welcome Admin!</string>
     <string name="login_judul">LOGIN</string>
-    <string name="login_dontHaveAccount">Dont have account?</string>
-    <string name="login_clickHere">Click here</string>
-
-    <!-- register -->
-    <string name="signup_judul">SIGN UP</string>
-    <string name="signup_haveAccount">Already have account?</string>
-
-    <!-- fill up data -->
-    <string name="fillupdata_judul">COMPLETE YOUR PROFILE</string>
 
     <!-- dashboard -->
     <string name="dashboard_judul1">Car List</string>
     <string name="dashboard_judul2">Worker List</string>
 
-    <!-- profile -->
-    <string name="profile_nama">*Nama Pengguna*</string>
+    <!-- car -->
+
+    <!-- worker -->
+    <string name="worker_fullName">Full Name</string>
+    <string name="worker_hintFullName">Enter Your Full Name</string>
+    <string name="worker_position">Position</string>
+    <string name="worker_hintPosition">Enter Your Position</string>
+    <string name="worker_phone">Phone</string>
+    <string name="worker_hintPhone">Enter Your Phone Number</string>
+    <string name="worker_address">Address</string>
+    <string name="worker_hintAddress">Enter Your Address</string>
 
     <!-- button-->
     <string name="btn_masuk">Login</string>
-    <string name="btn_daftar">Sign Up</string>
-    <string name="btn_lanjut">Next</string>
     <string name="btn_pilih">Choose</string>
     <string name="btn_keluar">Logout</string>
+    <string name="btn_tambah">Add</string>
     <string name="btn_ubah">Edit</string>
     <string name="btn_hapus">Delete</string>
 </resources>

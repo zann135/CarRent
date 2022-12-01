@@ -70,7 +70,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager layoutManagerMobil = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView.ItemDecoration decorationMobil = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-
         recyclerViewMobil.setLayoutManager(layoutManagerMobil);
         recyclerViewMobil.addItemDecoration(decorationMobil);
         recyclerViewMobil.setAdapter(carAdapter);
@@ -84,16 +83,16 @@ public class DashboardActivity extends AppCompatActivity {
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent searching = new Intent(DashboardActivity.this, DashboardActivity.class);
-                startActivity(searching);
+                Intent dashboard = new Intent(DashboardActivity.this, DashboardActivity.class);
+                startActivity(dashboard);
             }
         });
 
         car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent searching = new Intent(DashboardActivity.this, DataCarActivity.class);
-                startActivity(searching);
+                Intent car = new Intent(DashboardActivity.this, DataCarActivity.class);
+                startActivity(car);
             }
         });
 
@@ -139,6 +138,7 @@ public class DashboardActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()){
                                 Car car = new Car(document.getString("nama"), document.getString("harga"), document.getString("imageCar"), document.getString("tahun"), document.getString("jumlah_orang"), document.getString("transmisi"));
+                                car.setId(document.getId());
                                 listCar.add(car);
                             }
                             carAdapter.notifyDataSetChanged();
@@ -158,6 +158,7 @@ public class DashboardActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()){
                                 User user = new User(document.getString("name"), document.getString("position"), document.getString("phone"), document.getString("gender"), document.getString("address"), document.getString("imageUser"));
+                                user.setId(document.getId());
                                 listUser.add(user);
                             }
                             userAdapter.notifyDataSetChanged();
@@ -184,24 +185,6 @@ public class DashboardActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
-
-
-
-//    private void deleteDataWorkers(String id){
-//        progressDialog.show();
-//        db.collection("users").document(id)
-//                .delete()
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (!task.isSuccessful()){
-//                            Toast.makeText(getApplicationContext(), "Failed delete data", Toast.LENGTH_SHORT).show();
-//                        }
-//                        progressDialog.dismiss();
-//                        getData();
-//                    }
-//                });
-//    }
 
 //    private void deleteDataMobil(String id){
 //        progressDialog.show();

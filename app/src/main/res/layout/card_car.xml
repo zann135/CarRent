@@ -58,8 +58,8 @@
                     android:id="@+id/tvCarName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
                     android:text="Avanza Veloz New Edition"
                     android:textStyle="bold"
                     android:textColor="#353739"
@@ -71,8 +71,8 @@
                     android:id="@+id/CarYearSection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="32dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCarName">
 
@@ -102,10 +102,9 @@
                     android:id="@+id/CarCapacitySection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="12dp"
                     app:layout_constraintStart_toStartOf="parent"
-
                     app:layout_constraintTop_toBottomOf="@+id/CarYearSection">
 
                         <ImageView
@@ -134,10 +133,10 @@
                     android:id="@+id/CarTransmissionSection"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CarCapacitySection">
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCarName">
 
                         <ImageView
                             android:id="@+id/ivCarTransmission"
@@ -161,41 +160,6 @@
                             app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <CheckBox
-                    android:id="@+id/cbDriver"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="180dp"
-                    android:text="Supir"
-                    android:textSize="13sp"
-                    android:textColor="#353739"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvCarName"/>
 
-                <CheckBox
-                    android:id="@+id/cbTourGuide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="180dp"
-                    android:text="Pemandu Wisata"
-                    android:textSize="13sp"
-                    android:textColor="#353739"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cbDriver"/>
-
-                <Button
-                    android:id="@+id/btnEditCar"
-                    android:layout_width="80dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Edit"
-                    android:gravity="center"
-                    android:textAllCaps="false"
-                    android:textColor="#000000"
-                    android:backgroundTint="#FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/CarTransmissionSection" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

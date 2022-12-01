@@ -1,5 +1,6 @@
 package com.example.carrent.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,15 @@ import java.util.List;
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
     private Context context;
     private List<Car> list;
+    private Dialog dialog;
+
+    public interface Dialog{
+        void onClick(int position);
+    }
+
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
+    }
 
     public CarAdapter(Context context, List<Car> list){
         this.context = context;
@@ -58,6 +68,14 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
             tvPassenger = itemView.findViewById(R.id.tvCarSeat);
             tvTransmission = itemView.findViewById(R.id.tvCarTransmission);
             ivCarPhoto = itemView.findViewById(R.id.ivCarPhoto);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(dialog != null){
+                        dialog.onClick(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 }
