@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "790464360093",
+    "project_id": "carrent-project",
+    "storage_bucket": "carrent-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790464360093:android:115109c10f5df16c18ee74",
+        "android_client_info": {
+          "package_name": "com.example.carrent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790464360093-sqb7m4mouqgcroe1odfvbi64stdmtoiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carrent",
+            "certificate_hash": "aa3045ff4d50c08b8d1cecf7da905737e79b5d13"
+          }
+        },
+        {
+          "client_id": "790464360093-rn0gie4bjfen1798ms10qgm8j3rr3mro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Jz0WMdBYSChUtsTnH3FNrpPJC3DWhhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790464360093-rn0gie4bjfen1798ms10qgm8j3rr3mro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

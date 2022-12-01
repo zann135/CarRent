@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="270dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CarSelectionSection"
+        android:layout_width="350dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="20dp"
+        android:background="#FBC99C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivCarPhoto"
+            android:layout_width="330dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRupiah"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="#E1F0F4"
+            android:gravity="center"
+            android:paddingStart="2dp"
+            android:text="Rp "
+            android:textColor="#353739"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvCarPrice"
+            app:layout_constraintTop_toTopOf="@id/ivCarPhoto" />
+
+        <TextView
+            android:id="@+id/tvCarPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="#E1F0F4"
+            android:paddingEnd="2dp"
+            android:gravity="center"
+            android:text="400.000"
+            android:textColor="#353739"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivCarPhoto"
+            app:layout_constraintTop_toTopOf="@id/ivCarPhoto" />
+
+        <TextView
+            android:id="@+id/tvCarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Avanza Veloz New Edition"
+            android:textStyle="bold"
+            android:textColor="#353739"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCarPhoto" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CarYearSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCarName">
+
+            <ImageView
+                android:id="@+id/ivCarYear"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/calendar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvCarYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="2020"
+                android:textColor="#353739"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCarYear"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CarCapacitySection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/CarYearSection">
+
+            <ImageView
+                android:id="@+id/ivCarSeat"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/people"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvCarSeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="7"
+                android:textColor="#353739"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivCarSeat" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CarTransmissionSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CarCapacitySection">
+
+            <ImageView
+                android:id="@+id/ivCarTransmission"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/manual_transmission"
+                app:layout_constraintEnd_toStartOf="@id/tvCarTransmission"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvCarTransmission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Automatic"
+                android:textColor="#353739"
+                android:textSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <CheckBox
+            android:id="@+id/cbDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="180dp"
+            android:text="Supir"
+            android:textSize="13sp"
+            android:textColor="#353739"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCarName"/>
+
+        <CheckBox
+            android:id="@+id/cbTourGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="180dp"
+            android:text="Pemandu Wisata"
+            android:textSize="13sp"
+            android:textColor="#353739"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbDriver"/>
+
+        <Button
+            android:id="@+id/btnEditCar"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/btn_ubah"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:backgroundTint="@color/colorSecondary"
+            app:layout_constraintEnd_toStartOf="@id/btnDeleteCar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CarTransmissionSection" />
+
+        <Button
+            android:id="@+id/btnDeleteCar"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/btn_hapus"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#c9382a"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CarTransmissionSection"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

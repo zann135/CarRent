@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">CarRent</string>
+
+    <!-- common use -->
+    <string name="username">Username</string>
+    <string name="hintUsername">Enter Your Username</string>
+    <string name="password">Password</string>
+    <string name="hintPassword">Enter Your Password</string>
+    <string name="email">Email</string>
+    <string name="hintEmail">Enter Your Email</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="hintConfirmPassword">Enter Your Confirm Password</string>
+    <string name="nik">NIK</string>
+    <string name="hintNik">Enter Your NIK</string>
+    <string name="namaLengkap">Full Name</string>
+    <string name="hintNamaLengkap">Enter Your Full Name</string>
+    <string name="tanggalLahir">Date of Birth</string>
+    <string name="hintTanggalLahir">dd/mm/yyyy</string>
+    <string name="jenisKelamin">Gender</string>
+    <string name="pria">Male</string>
+    <string name="wanita">Female</string>
+    <string name="alamat">Address</string>
+    <string name="hintAlamat">Enter Your Address</string>
+    <string name="noHp">Phone</string>
+    <string name="hintNoHp">Enter Your Phone Number</string>
+
+    <!-- NavBar -->
+    <string name="dashboard">Dashboard</string>
+    <string name="car">Car</string>
+    <string name="worker">Worker</string>
+
+    <!-- login -->
+    <string name="login_welcome">Welcome Admin!</string>
+    <string name="login_judul">LOGIN</string>
+    <string name="login_dontHaveAccount">Dont have account?</string>
+    <string name="login_clickHere">Click here</string>
+
+    <!-- register -->
+    <string name="signup_judul">SIGN UP</string>
+    <string name="signup_haveAccount">Already have account?</string>
+
+    <!-- fill up data -->
+    <string name="fillupdata_judul">COMPLETE YOUR PROFILE</string>
+
+    <!-- dashboard -->
+    <string name="dashboard_judul1">Car List</string>
+    <string name="dashboard_judul2">Worker List</string>
+
+    <!-- profile -->
+    <string name="profile_nama">*Nama Pengguna*</string>
+
+    <!-- button-->
+    <string name="btn_masuk">Login</string>
+    <string name="btn_daftar">Sign Up</string>
+    <string name="btn_lanjut">Next</string>
+    <string name="btn_pilih">Choose</string>
+    <string name="btn_keluar">Logout</string>
+    <string name="btn_ubah">Edit</string>
+    <string name="btn_hapus">Delete</string>
+</resources>
